@@ -77,3 +77,25 @@ def unique(*args):
 
   return pd.unique(series)
 
+def plot_map(dataframe, lat, long, radius, initial_point, initial_zoom = 12):
+  if type(radius) == int:
+    rad = lambda row: radius
+  else:
+    rad = lambda row: row[radius]
+
+  plot = folium.Map(
+    location = initial_point,
+    tiles='cartodbpositron',
+    zoom_start=initial_zoom)
+  dataframe.apply(lambda row: folium.CircleMarker(location=[row[lat], row[long]], fill = True, radius = rad(row)).add_to(plot), axis=1)
+  return plot
+
+def plot_heat(dataframe, lat, long, heat, initial_point, radius = 10):
+  if heat == None:
+    points = dataframe[[lat, long]]
+  else:
+    points = dataframe[[lat, long, heat]]
+
+  plot = folium.Map(initial_point,zoom_start=11)
+  plot.add_child(plugins.HeatMap(points.values, radius = radius))
+  return plot
