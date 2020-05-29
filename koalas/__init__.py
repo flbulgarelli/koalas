@@ -14,20 +14,20 @@ def type_name(value):
 # type checkers
 # =============
 
-def check_single_dataframe(dataframe, function_name): 
+def check_single_dataframe(dataframe, function_name):
     if type(dataframe) is not pd.DataFrame:
         raise RuntimeError(f"El argumento de {function_name} debe ser un dataframe, pero vos le pasaste un {type_name(dataframe)}")
 
-def check_single_series(series, function_name): 
+def check_single_series(series, function_name):
     if type(series) is not pd.Series:
         raise RuntimeError(f"El argumento de {function_name} debe ser un series, pero vos le pasaste un {type_name(series)}")
 
-def check_single_dataframe_or_series(value, function_name): 
+def check_single_dataframe_or_series(value, function_name):
     if type(value) is not pd.DataFrame and type(value) is not pd.Series:
         raise RuntimeError(f"El argumento de {function_name} debe ser un dataframe o un series, pero vos le pasaste un {type_name(value)}")
 
 def check_args_count(args, expected_count, message):
-    if len(args) != expected_count: 
+    if len(args) != expected_count:
         raise RuntimeError(f"{message}, pero vos le estás pasando {len(args)}")
 
 
@@ -73,5 +73,3 @@ def unique(*args):
     check_single_series(series, 'unique')
 
     return pd.unique(series)
-
-koalas.filter(dataframe, lambda it: it.field  > 0)
