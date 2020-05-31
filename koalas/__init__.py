@@ -72,19 +72,42 @@ def describe(*args):
   _check_args_count(args, 1, "describe tiene que tomar un argumento (el dataframe o series)")
   value, = args
   _check_single_dataframe_or_series(value, 'describe')
-  return dataframe.describe()
+  return value.describe()
 
-def maximum(*args):
-  _check_args_count(args, 1, "maximum tiene que tomar un argumento (el dataframe o series)")
+def max(*args):
+  _check_args_count(args, 1, "max tiene que tomar un argumento (el dataframe o series)")
   value, = args
-  _check_single_dataframe_or_series(value, 'maximum')
-  return dataframe.max()
+  _check_single_dataframe_or_series(value, 'max')
+  return value.max()
 
-def minimum(*args):
-  _check_args_count(args, 1, "minimum tiene que tomar un argumento (el dataframe o series)")
+def min(*args):
+  _check_args_count(args, 1, "min tiene que tomar un argumento (el dataframe o series)")
   value, = args
-  _check_single_dataframe_or_series(value, 'minimum')
-  return dataframe.min()
+  _check_single_dataframe_or_series(value, 'min')
+  return value.min()
+
+def mean(*args):
+  _check_args_count(args, 1, "mean tiene que tomar un argumento (el dataframe o series)")
+  value, = args
+  _check_single_dataframe_or_series(value, 'mean')
+  return value.mean()
+
+def median(*args):
+  _check_args_count(args, 1, "median tiene que tomar un argumento (el dataframe o series)")
+  value, = args
+  _check_single_dataframe_or_series(value, 'median')
+  return value.median()
+
+def mode(*args):
+  _check_args_count(args, 1, "mode tiene que tomar un argumento (el dataframe o series)")
+  value, = args
+  _check_single_dataframe_or_series(value, 'mode')
+  return value.mode()
+
+
+# std
+# sample, head, tail
+
 
 def unique(*args):
   _check_args_count(args, 1, "unique tiene que tomar un argumento (el series)")
