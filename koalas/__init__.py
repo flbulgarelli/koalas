@@ -145,13 +145,13 @@ def plot_map(dataframe, lat, long, radius, initial_point, initial_zoom = 12):
   dataframe.apply(lambda row: folium.CircleMarker(location=[row[lat], row[long]], fill = True, radius = rad(row)).add_to(plot), axis=1)
   return plot
 
-def plot_heat(dataframe, lat, long, heat, initial_point, radius = 10):
+def plot_heat(dataframe, lat, long, heat, initial_point, radius = 10, initial_zoom = 12):
   if heat == None:
     points = dataframe[[lat, long]]
   else:
     points = dataframe[[lat, long, heat]]
 
-  plot = folium.Map(initial_point,zoom_start=11)
+  plot = folium.Map(initial_point,zoom_start = initial_zoom)
   plot.add_child(plugins.HeatMap(points.values, radius = radius))
   return plot
 
@@ -188,8 +188,8 @@ def geocode_column(dataframe, column, prefix = None):
   dataframe = dataframe.copy()
   local_geocoder = SuffixedGeocoder(geocoder().geocode, prefix) if prefix else geocoder().geocode
   coordinates = dataframe[column].apply(local_geocoder)
-  dataframe['lat'] = coordendas.apply(lambda c: c.latitude if c else None)
-  dataframe['long'] = coordendas.apply(lambda c: c.longitude if c else None)
+  dataframe['lat'] = coordinates.apply(lambda c: c.latitude if c else None)
+  dataframe['long'] = coordinates.apply(lambda c: c.longitude if c else None)
   return dataframe
 
 # =======
